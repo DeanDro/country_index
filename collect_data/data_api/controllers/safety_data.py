@@ -39,3 +39,28 @@ def collect_peace_index_data():
 
     return peace_data
 
+def return_safety_data():
+    """
+    Method that will collect the data from the other two methods and return a 
+    dictionary with the safety index by country. 
+    """
+    peace_data = collect_peace_index_data()
+    travel_data = collect_travel_safe_data()
+
+    data = {
+        'peace_data': {},
+        'travel_data': {}
+    }
+
+    dict_data1 = {}
+    for key in peace_data:
+        dict_data1[key] = peace_data[key]
+    
+    dict_data2 = {}
+    for key in travel_data:
+        dict_data2[key] = travel_data[key]
+
+    data['peace_data'] = dict_data1
+    data['travel_data'] = dict_data2
+    return data
+
