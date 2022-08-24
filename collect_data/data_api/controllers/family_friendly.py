@@ -16,5 +16,23 @@ def family_friendly_data():
     """
     family_dict = {}
     data_request = requests.get(ceo_url)
-    soup = BeautifulSoup(data_request.content)
-    
+    soup = BeautifulSoup(data_request.content, 'html.parser')
+    table = soup.find('tbody')
+
+    i = 1
+    country_holder = ''
+
+    for row in table.findAll('td'):
+        if i == 4:
+            i = 2
+        elif i == 2:
+            country_holder = str(row.text)
+            i += 1
+        elif i == 3:
+            family_dict[country_holder] = float(row.text)
+            i += 1
+        else:
+            i += 1
+
+    return family_dict
+
